@@ -1,0 +1,10 @@
+FROM fedora:41
+WORKDIR /app
+RUN <<EOF
+    dnf install -y python3-pip git
+    dnf clean all
+EOF
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+COPY . .
+# ENTRYPOINT ["uvicorn", "main:app", "--reload", "--port", "80"]
